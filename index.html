@@ -163,7 +163,17 @@
     });
 
     window.onload = function() {
-      const savedProgram = localStorage.getItem('selectedProgram');
+      
+    const savedProgram = localStorage.getItem('selectedProgram');
+    if (savedProgram) {
+      document.getElementById("select1").value = savedProgram;
+      getProjects();
+    } else {
+      document.getElementById("select1").value = "";
+      allProjects = [];
+      updateProjectList([]);
+    }
+    
       if (savedProgram) {
         document.getElementById("select1").value = savedProgram;
         getProjects();
