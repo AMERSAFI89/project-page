@@ -1,191 +1,153 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>واجهة الدخول إلى المشاريع</title>
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <title>إدخال البيانات</title>
   <style>
     body {
       font-family: 'Cairo', sans-serif;
       margin: 0;
       padding: 0;
       background-color: #c9031d;
-      color: #ffffff;
       text-align: center;
       display: flex;
-      flex-direction: column;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      height: 100vh;
+      flex-direction: column;
     }
-
-    img {
-      margin-top: 30px;
-      max-width: 250px;
-    }
-
-    h2 {
-      color: #f7de37;
-      font-weight: 400;
-      margin-top: 10px;
-    }
-
-    form {
-      background-color: #c9031d;
-      padding: 20px;
-      border-radius: 15px;
-      margin-top: 20px;
-      width: 90%;
-      max-width: 500px;
-    }
-
     .box {
-      margin-bottom: 15px;
+      position: relative;
+      display: block;
+      text-align: center;
     }
-
-    .box h3 {
-      margin-bottom: 10px;
-    }
-
-    select {
-      width: 100%;
-      padding: 12px;
-      font-size: 18px;
+    .box select {
+      color: #000;
+      width: 250px;
       border: none;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+      font-size: 20px;
+      box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+      appearance: button;
+      outline: none;
+      border-radius: 5px;
     }
-
-    #searchInput {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: none;
+    .box select option {
+      padding: 30px;
+    }
+    select, button {
       font-size: 16px;
+      padding: 10px;
+      margin: 10px;
     }
-
     #file_url {
+      border-radius: 5px;
+      margin: 20px;
+      padding: 20px;
+      font-size: 20px;
+      color: #f7de37;
+      text-align: center;
       display: none;
-      text-decoration: none;
-      color: #c9031d;
-      background-color: #f7de37;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: background 0.3s ease;
-    }
-
-    #file_url:hover {
-      background-color: #ffe867;
-    }
-
-    @media (max-width: 600px) {
-      select, #searchInput, #file_url {
-        font-size: 16px;
-      }
     }
   </style>
 </head>
 <body>
-  <img src="https://maanprograms.org/assets2/images/maan-ctr.logo-removebg-preview.png" alt="Logo">
-  <h2>واجهة الدخول إلى المشاريع</h2>
-  <form id="inputForm">
+  <div style="text-align:center; margin-top:50px">
+    <img src="https://maanprograms.org/assets2/images/maan-ctr.logo-removebg-preview.png" class="img-fluid top_logo" alt="Logo">
+  </div>
+  <h2 style="color: #f7de37; font-weight:200;">واجهة الدخول إلى المشاريع</h2>
+
+  <form id="inputForm" style="background-color:#c9031d;padding:30px; border-radius:20px;width: fit-content;">
     <div class="box">
-      <h3>اختر البرنامج</h3>
+      <h3 style="color: #fff; display:inline-block">اختر البرنامج</h3>
       <select id="select1" onchange="getProjects()">
         <option value="">اختر</option>
         <option value="1">توفير خدمات الصرف الصحي ,المياه ,النظافة العامة,التوعية الصحية</option>
         <option value="2">دعم وتوفير الغذاء</option>
+        <option value="3">توفير المواد الغير غذائية</option>
+        <option value="4">دعم المزارعين والقطاع الزراعي</option>
+        <option value="5">الدعم النقدي</option>
+        <option value="6">دعم المبادرات الشبابية والعمل المجتمعى</option>
+        <option value="7">دعم التعليم</option>
+        <option value="8">الحماية والدعم النفسي والاجتماعي</option>
       </select>
     </div>
     <div class="box">
-      <h3>اختر المشروع</h3>
-      <input type="text" id="searchInput" placeholder="🔍 ابحث عن مشروع...">
+      <h3 style="color:#fff;display:inline-block">اختر المشروع</h3>
       <select id="select2" onchange="getUrlFile()">
         <option value="">اختر</option>
       </select>
     </div>
-    <a id="file_url" href="#" target="_blank">يرجى الضغط لتوجيهك لملف المشروع</a>
+    <div>
+      <a id="file_url" href="#" target="_blank">يرجى الضغط لتوجيهك لملف المشروع</a>
+    </div>
   </form>
 
   <script>
-    let allProjects = [];
+    const allProjects = {
+      1: [
+        { name: 'UNAO ', url: 'https://docs.google.com/spreadsheets/d/1bHldBA9Dy_N0cnfUg_tlhWlsdVAwydxHEtmA8i3-WX8/edit?gid=0#gid=0' },
+        { name: 'OCHG0AK', url: 'https://docs.google.com/spreadsheets/d/1eBJDCvyJd6m1vKs1RG4zKzz9tYWOAgXQZqpI6_MGbAk/edit?usp=sharing' },
+        { name: 'SAMG00H', url: 'https://docs.google.com/spreadsheets/d/1vyCnBXFfKW48Au5fr2oPzEvSqPR2rge0NpIa9OfPpiM/edit?usp=sharing' },
+        { name: 'SAMG00D', url: 'https://docs.google.com/spreadsheets/d/1f6nS5oBIkAHpvt-7WkSixHqrj0jG5qqoxOeOIAq0kaM/edit?gid=0#gid=0' },
+        { name: 'DCA NORAD', url: 'https://docs.google.com/spreadsheets/d/1uSlngDmU9nvo4-_sjdUHWSwoJfKq-KNZGSbN7AYz23o/edit?usp=sharing' },
+        { name: 'SPCG0F', url: 'https://docs.google.com/spreadsheets/d/1CYqt9Y0gHxi_vITwwY1gikXNMlK4CeYi4CSssJKAyaU/edit?usp=sharing' },
+        { name: 'APHR01 ', url: 'https://docs.google.com/spreadsheets/d/1vBQIS8wd1XIvPxxOIfyRcSuCo-8-p8ZUfC8U-ZrFtbM/edit?usp=sharing' }
+      ],
+      2: [
+        { name: 'OWFPG0C', url: 'https://docs.google.com/spreadsheets/d/1bE6eVNo7Kv0vh2F3a65dYYUuNO-HpqIt_xiPD948USs/edit?usp=sharing' },
+        { name: 'ACDG00U', url: 'https://docs.google.com/spreadsheets/d/11wA6Sbm8ONHBdUofSYTgfqmY86iJh1XisCoHLBnxEnk/edit?usp=sharing' },
+        { name: 'DCAG0CP', url: 'https://docs.google.com/spreadsheets/d/15i8OzWX3kvCOMZCU-YlWAQkuYupCVw0gho9iRizD6W8/edit?usp=sharing' }
+      ],
+      3: [
+        { name: 'SAMG00A ', url: 'https://docs.google.com/spreadsheets/d/1lkTNw13neF2jVOQoK_QwZA6PDns_IWoS_41gKfuNuJE/edit?usp=sharing' },
+        { name: 'SAMG00G', url: 'https://docs.google.com/spreadsheets/d/1Sj2PVJupez7XYfZeLM9WnVXuArxkTyOihrgPf2b4TUE/edit?usp=sharing' },
+        { name: 'OCHG0AM', url: 'https://docs.google.com/spreadsheets/d/1ARI0SliGTEszTmmDH2AldsvRUMLPKLsCx6Wzg_7v08I/edit?usp=sharing' },
+        { name: 'HEKG00L', url: 'https://docs.google.com/spreadsheets/d/1Lvf09mcLt-y5hqKLJil_I4NNwFnQZImUc_CZigiN0W0/edit?gid=0#gid=0' },
+        { name: 'HEKG00k', url: 'https://docs.google.com/spreadsheets/d/1JWOz3tTR-oBjGqKNzZy0o4BBON8tHnV5Th2J-QZBggQ/edit?usp=sharing' }
+      ],
+      // ... باقي البرامج بنفس الشكل
+    };
 
     function getProjects() {
-      var program = document.getElementById("select1").value;
-      let data = [];
+      const program = document.getElementById("select1").value;
+      const projectList = allProjects[program] || [];
 
-      if(program == "1"){
-        data = [
-          { name: 'UNAO', url: 'https://docs.google.com/spreadsheets/d/1bHldBA9Dy_N0cnfUg_tlhWlsdVAwydxHEtmA8i3-WX8/edit?gid=0#gid=0' },
-          { name: 'OCHG0AK', url: 'https://docs.google.com/spreadsheets/d/1eBJDCvyJd6m1vKs1RG4zKzz9tYWOAgXQZqpI6_MGbAk/edit?usp=sharing' },
-          { name: 'SAMG00H', url: 'https://docs.google.com/spreadsheets/d/1vyCnBXFfKW48Au5fr2oPzEvSqPR2rge0NpIa9OfPpiM/edit?usp=sharing' }
-        ];
-      } else if(program == "2"){
-        data = [
-          { name: 'OWFPG0C', url: 'https://docs.google.com/spreadsheets/d/1bE6eVNo7Kv0vh2F3a65dYYUuNO-HpqIt_xiPD948USs/edit?usp=sharing' },
-          { name: 'ACDG00U', url: 'https://docs.google.com/spreadsheets/d/11wA6Sbm8ONHBdUofSYTgfqmY86iJh1XisCoHLBnxEnk/edit?usp=sharing' },
-          { name: 'DCAG0CP', url: 'https://docs.google.com/spreadsheets/d/15i8OzWX3kvCOMZCU-YlWAQkuYupCVw0gho9iRizD6W8/edit?usp=sharing' }
-        ];
-      }
-
-      allProjects = data;
-      updateProjectList(data);
-      localStorage.setItem('selectedProgram', program);
-    }
-
-    function updateProjectList(projects) {
-      const select = document.getElementById("select2");
-      select.innerHTML = '<option value="">اختر</option>';
-      projects.forEach(p => {
-        const option = document.createElement("option");
-        option.value = p.url;
-        option.textContent = p.name;
-        select.appendChild(option);
+      let options = '<option value="">اختر</option>';
+      projectList.forEach(el => {
+        options += `<option value="${el.url}">${el.name}</option>`;
       });
+
+      const select2 = document.getElementById("select2");
+      select2.innerHTML = options;
+
+      // حفظ البرنامج المختار
+      localStorage.setItem("selectedProgram", program);
     }
 
     function getUrlFile() {
-      var url = document.getElementById("select2").value;
-      const link = document.getElementById('file_url');
-      link.href = url;
-      link.style.display = url ? "inline-block" : "none";
-      localStorage.setItem('selectedProject', url);
+      const url = document.getElementById("select2").value;
+      const fileLink = document.getElementById("file_url");
+      fileLink.href = url;
+      fileLink.style.display = url ? "inline-block" : "none";
+      localStorage.setItem("selectedProject", url);
     }
-
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-      const keyword = e.target.value.toLowerCase();
-      const filtered = allProjects.filter(p => p.name.toLowerCase().includes(keyword));
-      updateProjectList(filtered);
-    });
 
     window.onload = function() {
-      
-    const savedProgram = localStorage.getItem('selectedProgram');
-    if (savedProgram) {
-      document.getElementById("select1").value = savedProgram;
-      getProjects();
-    } else {
-      document.getElementById("select1").value = "";
-      allProjects = [];
-      updateProjectList([]);
-    }
-    
+      const savedProgram = localStorage.getItem("selectedProgram");
+      const savedProject = localStorage.getItem("selectedProject");
       if (savedProgram) {
         document.getElementById("select1").value = savedProgram;
         getProjects();
-      }
-      const savedProject = localStorage.getItem('selectedProject');
-      if (savedProject) {
         setTimeout(() => {
-          document.getElementById("select2").value = savedProject;
-          getUrlFile();
+          if (savedProject) {
+            document.getElementById("select2").value = savedProject;
+            getUrlFile();
+          }
         }, 300);
       }
-    }
+    };
   </script>
 </body>
 </html>
